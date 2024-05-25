@@ -25,6 +25,7 @@
                     <li><a href="{% url 'catalog:index' %}">Home</a></li>
                     <li><a href="{% url 'catalog:books' %}">All books</a></li>
                     <li><a href="">All authors</a></li>
+                    <li><a href="{% url 'catalog:my-borrowed' %}">My Borrowed</a></li>
                     {% if user.is_authenticated %}
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
