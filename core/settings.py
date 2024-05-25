@@ -80,6 +80,9 @@ TEMPLATES = [
     },
 ]
 
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+
 WSGI_APPLICATION = "core.wsgi.application"
 
 
@@ -98,18 +101,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    # },
 ]
 
 
@@ -148,3 +151,5 @@ FIXTURE_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
