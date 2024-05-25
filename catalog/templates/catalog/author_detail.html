@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Title: {{ author }}</h1>
+    <p>Date of birth: {{ author.date_of_birth }}</p>
+    <p>Date of death: {{ author.date_of_death }}</p>
+
+    <a href="{% url 'catalog:author-update' author.pk %}">Update</a>
+    <a href="{% url 'catalog:author-delete' author.pk %}">Delete</a>
+{% endblock %}
