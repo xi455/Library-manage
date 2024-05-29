@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_bootstrap5",
 
     # app
     "library",
@@ -82,6 +83,8 @@ TEMPLATES = [
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = 'catalog:index'
 
 WSGI_APPLICATION = "core.wsgi.application"
 

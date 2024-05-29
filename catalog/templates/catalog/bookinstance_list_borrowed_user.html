@@ -1,19 +1,19 @@
 {% extends "base_generic.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
     <h1>Borrowed books</h1>
 
     {% if bookinstance_list %}
-    <ul>
-
-      {% for bookinst in bookinstance_list %}
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'catalog:book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a> ({{ bookinst.due_back }})
-        {% if perms.catalog.can_mark_returned %}- <a href="{% url 'catalog:renew-book-librarian' bookinst.id %}">Renew</a>{% endif %}
-
-      </li>
-      {% endfor %}
-    </ul>
+      <ol class="list-group list-group-numbered">
+        {% for book in bookinstance_list %}
+        <li class="list-group-item {% if bookinst.is_overdue %}text-danger{% endif %}">
+          <a href="{% url 'catalog:book-detail' book.book.pk %}"><strong>{{ book.book.title }}：</strong></a> ({{ book.due_back }})
+          {% if perms.catalog.can_mark_returned %}- <a href="{% url 'catalog:renew-book-librarian' book.id %}">Renew</a>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
 
     {% else %}
       <p>There are no books borrowed.</p>

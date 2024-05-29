@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
 
 <h1>Delete Author</h1>
@@ -8,7 +10,7 @@
 
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="submit" value="Yes, delete." />
+  {% bootstrap_button button_type="submit" content="Yes, Delete" %}
 </form>
 
 {% endblock %}

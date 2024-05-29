@@ -1,11 +1,17 @@
 {% extends "base_generic.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
+<h1>Author Create</h1>
+
 <form action="" method="post">
   {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Submit" />
+
+  {% bootstrap_form form %}
+
+  {% bootstrap_button button_type="submit" content="OK" %}
+  {% bootstrap_button button_type="reset" content="Cancel" %}
+
 </form>
 {% endblock %}

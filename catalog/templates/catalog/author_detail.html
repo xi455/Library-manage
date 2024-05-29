@@ -1,10 +1,16 @@
 {% extends "base_generic.html" %}
 
+{% load django_bootstrap5 %}
 {% block content %}
-    <h1>Title: {{ author }}</h1>
+    <h1>Author: {{ author }}</h1>
     <p>Date of birth: {{ author.date_of_birth }}</p>
     <p>Date of death: {{ author.date_of_death }}</p>
 
-    <a href="{% url 'catalog:author-update' author.pk %}">Update</a>
-    <a href="{% url 'catalog:author-delete' author.pk %}">Delete</a>
+    <div class="mt-3">
+        {% url 'catalog:author-update' author.pk as author_update %}
+        {% bootstrap_button button_type="link" content="Update Author" href=author_update %}
+        {% url 'catalog:author-delete' author.pk as author_delete %}
+        {% bootstrap_button button_type="link" content="Delete Author" href=author_delete %}
+    </div>
+
 {% endblock %}
