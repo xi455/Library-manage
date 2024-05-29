@@ -116,7 +116,7 @@ class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
 class AuthorCreate(CreateView):
     model = Author
     fields = '__all__'
-    initial={'date_of_death':'1971-11-13',}
+    initial={'date_of_birth':'1971-11-10', 'date_of_death':'1971-11-13',}
     template_name = 'catalog/author_form.html'
 
 
