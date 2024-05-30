@@ -18,17 +18,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import include, path
 from django.views.generic import RedirectView
 
 urlpatterns = [
     path("", RedirectView.as_view(url="catalog/", permanent=True)),
     path("admin/", admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('catalog/', include('catalog.urls', namespace="catalog")),
-    path('library/', include('library.urls', namespace="library")),
-    path('api/', include('api.urls', namespace="api")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("catalog/", include("catalog.urls", namespace="catalog")),
+    path("library/", include("library.urls", namespace="library")),
+    path("api/", include("api.urls", namespace="api")),
 ]
 
 urlpatterns += static(

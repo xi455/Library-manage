@@ -1,6 +1,6 @@
 from django.urls import path
-from api.canvas import canvas
 
+from api.canvas import canvas
 
 app_name = "canvas"
 urlpatterns = [
