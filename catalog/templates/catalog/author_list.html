@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+{% load static %}
+
 {% block content %}
   <div class="d-flex">
     <h1>Author List</h1>
@@ -18,4 +20,10 @@
   {% else %}
     <p>There are no authors in the library.</p>
   {% endif %}
+
+  <canvas id="chart" width="500" height="130"></canvas>
 {% endblock %}
+
+{% block script %}
+  <script src='{% static "canvas/authors_book_count.js" %}'></script>
+{% endblock script %}

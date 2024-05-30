@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 
+{% load static %}
 {% load django_bootstrap5 %}
 
 {% block content %}
@@ -18,7 +19,13 @@
     <li class="list-group-item"><strong>Authors:</strong> {{ num_authors }}</li>
   </ol>
 
+  <canvas id="chart" width="500" height="130"></canvas>
+
   <p>
     You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
   </p>
 {% endblock %}
+
+{% block script %}
+  <script src='{% static "canvas/genres_book_count.js" %}'></script>
+{% endblock script %}
