@@ -1,10 +1,15 @@
 {% extends "base_generic.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
   <div class="d-flex">
     <h1>Title: {{ book.title }}</h1>
     <ul class="mt-2 d-flex align-items-center">
-      <a href="{% url 'catalog:borrower-book' book.id %}" type="button" class="btn btn-outline-secondary">Book Borrower</a>      
+      <form action="{% url 'catalog:borrower-book' book.id %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_button button_type="submit" content="Book Borrower" button_class="btn btn-outline-secondary" %}
+      </form>
     </ul>
   </div>
 
