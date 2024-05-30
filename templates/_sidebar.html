@@ -1,0 +1,38 @@
+
+<!-- Sidebar -->
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+    <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+        href="{% url 'catalog:index' %}"
+        class="list-group-item list-group-item-action py-2 ripple"
+        aria-current="true"
+        >
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+        </a>
+        <a href="{% url 'catalog:books' %}" class="list-group-item list-group-item-action py-2 ripple {% if request.resolver_match.view_name == 'catalog:books' %}active{% endif %}">
+        <i class="fas fa-chart-area fa-fw me-3"></i><span>All books</span>
+        </a>
+        <a href="{% url 'catalog:authors' %}" class="list-group-item list-group-item-action py-2 ripple {% if request.resolver_match.view_name == 'catalog:authors' %}active{% endif %}"
+        ><i class="fas fa-lock fa-fw me-3"></i><span>All authors</span></a
+        >
+        {% if user.is_authenticated %}                        
+        <a href="{% url 'catalog:all-borrowed' %}" class="list-group-item list-group-item-action py-2 ripple {% if request.resolver_match.view_name == 'catalog:all-borrowed' %}active{% endif %}"
+        ><i class="fas fa-lock fa-fw me-3"></i><span>All Borrowed</span></a
+        >
+        {% endif %}
+        <a href="{% url 'catalog:my-borrowed' %}" class="list-group-item list-group-item-action py-2 ripple {% if request.resolver_match.view_name == 'catalog:my-borrowed' %}active{% endif %}"
+        ><i class="fas fa-chart-line fa-fw me-3"></i><span>My Borrowed</span></a
+        >
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="list-group-item list-group-item-action py-2 ripple">Logout</button>                
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="list-group-item list-group-item-action py-2 ripple">Login</a>    
+        {% endif %}
+    </div>
+    </div>
+</nav>
+<!-- Sidebar -->

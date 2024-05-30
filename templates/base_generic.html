@@ -23,29 +23,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-2">
-                    {% block sidebar %}
-                    <ul class="sidebar-nav">
-                        <li><a href="{% url 'catalog:index' %}">Home</a></li>
-                        <li><a href="{% url 'catalog:books' %}">All books</a></li>
-                        <li><a href="{% url 'catalog:authors' %}">All authors</a></li>
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'catalog:all-borrowed' %}">All Borrowed</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'catalog:my-borrowed' %}">My Borrowed</a></li>
-                        <div class="mt-3">
-                            {% if user.is_authenticated %}
-                                <form method="post" action="{% url 'logout' %}">
-                                    {% csrf_token %}
-                                    {% bootstrap_button button_type="submit" content="Logout" button_class="btn btn-outline-primary" %}
-                                </form>
-                            {% else %}
-                            {% url 'login' as login %}
-                            {% bootstrap_button button_type="link" content="Login" href=login button_class="btn btn-outline-primary" %}
-                            {% endif %}
-                        </div>
-                    </ul>
-                    </ul>
-                    {% endblock %}
+                    {% include "_sidebar.html" %}                    
                 </div>
                 <div class="col-sm-10">
                     
