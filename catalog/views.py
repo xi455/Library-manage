@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -64,6 +64,14 @@ class BookDetailView(LoginRequiredMixin, generic.DetailView):
     )
 
 
+class LoanedBooksListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing books on loan to current user."""
+
+    model = BookInstance
+    template_name = "catalog/bookinstance_list_borrowed.html"
+    paginate_by = 10
+
+
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
 
@@ -94,8 +102,8 @@ def borrower_book(request, pk):
         messages.success(request, "You have successfully borrowed the book.")
 
         return HttpResponseRedirect(reverse("catalog:my-borrowed"))
-
-    return render(request, "catalog/book_borrower.html", {"bookinst": book_inst})
+    
+    return redirect(book)
 
 
 @permission_required("catalog.can_mark_returned")
