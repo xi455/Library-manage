@@ -1,7 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Title: {{ book.title }}</h1>
+  <div class="d-flex">
+    <h1>Title: {{ book.title }}</h1>
+    <ul class="mt-2 d-flex align-items-center">
+      <a href="{% url 'catalog:borrower-book' book.id %}" type="button" class="btn btn-outline-secondary">Book Borrower</a>      
+    </ul>
+  </div>
 
   <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>
   <!-- author detail link not yet defined -->

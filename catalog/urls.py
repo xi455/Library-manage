@@ -13,6 +13,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
+    path("book/<uuid:pk>/borrower/", views.borrower_book, name="borrower-book"),
     path(
         "book/<uuid:pk>/renew/", views.renew_book_librarian, name="renew-book-librarian"
     ),

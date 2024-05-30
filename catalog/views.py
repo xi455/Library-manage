@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -78,6 +79,25 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
         )
 
 
+@login_required
+def borrower_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
+    if request.method == "POST":
+        book_inst = BookInstance(
+            book=book,
+            borrower=request.user,
+            due_back=datetime.date.today() + datetime.timedelta(weeks=3),
+            status="o",
+        )
+        book_inst.save()
+        messages.success(request, "You have successfully borrowed the book.")
+
+        return HttpResponseRedirect(reverse("catalog:my-borrowed"))
+
+    return render(request, "catalog/book_borrower.html", {"bookinst": book_inst})
+
+
 @permission_required("catalog.can_mark_returned")
 def renew_book_librarian(request, pk):
     """
@@ -96,9 +116,12 @@ def renew_book_librarian(request, pk):
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             book_inst.due_back = form.cleaned_data["renewal_date"]
             book_inst.save()
+            messages.success(request, "Book renewal successful.")
 
             # redirect to a new URL:
             return HttpResponseRedirect(reverse("catalog:my-borrowed"))
+        
+        messages.error(request, "Book renewal failed.")
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -145,6 +168,10 @@ class AuthorCreate(CreateView):
         "date_of_death": "1971-11-13",
     }
     template_name = "catalog/author_form.html"
+
+    def get_success_url(self) -> str:
+        messages.success(self.request, "Author created successfully.")
+        return super().get_success_url()
 
 
 class AuthorUpdate(UpdateView):

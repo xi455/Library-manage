@@ -15,6 +15,8 @@
         <!-- Add additional CSS in static file -->
         {% load static %}
         {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     </head>
     <body>
@@ -43,6 +45,9 @@
                     {% endblock %}
                 </div>
                 <div class="col-sm-10">
+                    
+                    {% bootstrap_messages %}                
+
                     {% block content %}{% endblock %}
 
                     {% block pagination %}
