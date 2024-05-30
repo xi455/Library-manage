@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 
+{% load static %}
 {% load django_bootstrap5 %}
 
 {% block content %}
@@ -19,6 +20,8 @@
   <p><strong>ISBN:</strong> {{ book.isbn }}</p>
   <p><strong>Language:</strong> {{ book.language }}</p>
   <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
+
+  <canvas id="chart" width="500" height="130"></canvas>
 
   <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
@@ -41,3 +44,10 @@
     {% endfor %}
   </div>
 {% endblock %}
+
+{% block script %}
+<script>
+  let book_id = {{ book.id }};
+</script>
+<script src='{% static "canvas/book_detail.js" %}'></script>
+{% endblock script %}
